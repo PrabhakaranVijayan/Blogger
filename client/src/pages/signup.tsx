@@ -1,14 +1,21 @@
 export default function Signup(){
     return(
-        <div className="border w-1/4 flex  justify-center items-center h-64 rounded mx-auto my-10  ">
-            <div className=" flex flex-col justify-center h-full space-y-4">
-             <input type="text" placeholder="username" className="border "></input>
+        <div className=" flex justify-center items-center h-screen w-screen bg-lime-100 ">
+            
+            <div className=" border-2 w-1/3  border-lime-700 flex flex-col justify-center p-10 pt-20 space-y-5 rounded">
+                <h2 className="">WordWaves</h2>
+                <div>Sign up to see Blogs from your friends...</div>
+             <input type="text" placeholder="username" className="border w-full rounded py-1 pl-3"></input>
              
-             <input type="text" placeholder="E-mail Id" className="border "></input>
+             <input type="text" placeholder="E-mail Id" className="border rounded py-1 pl-3"></input>
              
-             <input type="text" placeholder="password" className="border"></input>
+             <input type="text" placeholder="password" className="border rounded py-1 pl-3"></input>
+             <div className="flex justify-center">
+              <button  className="border rounded w-fit px-2 py-0.5">signup</button>
+              
+
+             </div>
              
-             <button  className="border rounded inline-block ">signup</button>
             </div>
         </div>
     )
