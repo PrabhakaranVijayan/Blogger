@@ -1,7 +1,8 @@
 import { PrismaClient } from '@prisma/client'
+
 const prisma = new PrismaClient()
 
-async function inserti (username:string,password:string,fullname:string,role:string){
+export default async function inserti (username:string,password:string,fullname:string,role:string){
     const res = await prisma.user.create({
         data:{
             username,
@@ -15,6 +16,19 @@ async function inserti (username:string,password:string,fullname:string,role:str
         }
     })
     console.log(res);
+    return ("user created successfully")
     
 }
-inserti("prabhass","suiiii","prabhakaran","engineer")
+export  async function checkuser(username:string){
+    const ans= await prisma.user.findUnique({
+        where:{
+            username:username
+            
+        }
+
+    })
+    return ans
+}
+
+
+

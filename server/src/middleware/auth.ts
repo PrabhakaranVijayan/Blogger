@@ -2,9 +2,9 @@ import jwt, {Secret } from "jsonwebtoken"
 import { Request,Response,NextFunction } from "express"
 import dotenv from 'dotenv'
 dotenv.config()
-const key =process.env.SECRET
+ const key =process.env.SECRET
 
-const  authenticate= async(req:Request,res:Response,next:NextFunction)=>{
+ const  authenticate= async(req:Request,res:Response,next:NextFunction)=>{
     const header= req.headers.authorization
     if(!header){
         return res.send("no token headers ")
@@ -22,6 +22,7 @@ const  authenticate= async(req:Request,res:Response,next:NextFunction)=>{
     })
 }
 module.exports={authenticate,key}
+export default authenticate
 
 
 
