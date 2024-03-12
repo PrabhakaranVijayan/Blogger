@@ -1,8 +1,10 @@
 import express,{Request,Response} from "express"
+import authenticate from "./middleware/auth";
 const app= express();
 const newuser= require('./routes/signup')
 app.use(express.json())
 const login= require('./routes/signin')
+const posts= require('./routes/Blogs')
 
 app.get('/',(req:Request,res:Response)=>{
     res.send("hello world!!")
@@ -10,6 +12,8 @@ app.get('/',(req:Request,res:Response)=>{
 
 app.use('/user',newuser)
 app.use('/user',login)
+app.use(authenticate)
+app.use('/user',posts)
 
 
 

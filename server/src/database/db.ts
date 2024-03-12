@@ -10,9 +10,6 @@ export default async function inserti (username:string,password:string,fullname:
             fullname,
             role
             
-            
-            
-        
         }
     })
     console.log(res);
@@ -28,6 +25,20 @@ export  async function checkuser(username:string){
 
     })
     return ans
+}
+
+export async function createBlog(title:string,content:string,userId:number){
+    const newBlog= await prisma.blog.create({
+        data:{
+            title,
+            content,
+            userId
+            
+        }
+       
+        
+    })
+    return newBlog
 }
 
 

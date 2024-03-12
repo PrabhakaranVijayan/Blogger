@@ -26,8 +26,8 @@ router.post('/signin',async (req,res)=>{
     }
     else{
         let token= jwt.sign({name:userdetails.data.username},code as Secret,{expiresIn:'1h'})
-        res.send(`welcome ${userdetails.data.username}`)
-        console.log(token)
+        res.send(`welcome ${userdetails.data.username} ${token}`)
+        
 
     }
 
