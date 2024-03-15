@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { number } from 'zod';
 
 const prisma = new PrismaClient()
 
@@ -39,6 +40,25 @@ export async function createBlog(title:string,content:string,userId:number){
         
     })
     return newBlog
+}
+
+export async function readBlog(id:number | null){
+    if(!id){
+        const allblogs= await prisma.blog.findMany()
+        return allblogs;
+
+    }
+    const selectedblog= await prisma.blog.findUnique({
+        where:{
+            id:id
+        },
+        select:{
+            title:true,
+            content:true
+        }
+    })
+    return selectedblog;
+
 }
 
 

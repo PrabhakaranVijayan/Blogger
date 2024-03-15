@@ -1,7 +1,7 @@
 // CRUD operations for the blog
 
-// create blog
-import express from 'express'
+// CREATE BLOG
+import express, { json } from 'express'
 const router= express.Router()
 
 import z from 'zod'
@@ -22,8 +22,19 @@ router.post('/blogs/new',async (req,res)=>{
         return
     }
     let crBlog= await createBlog(blogPost.data.title,blogPost.data.content,blogPost.data.userid)
-    res.status(200).send(`your blog is ${crBlog} `);
+    res.status(200).send(`your blog is ${crBlog.title} created`);
 
 })
+
+// READ  BLOG
+
+router.get('/blogs/:id',async(req,res)=>{
+    const blogid= req.params.id
+    if(!blogid){
+        res.status(200).json({})
+    }
+})
+
+
 
 module.exports= router

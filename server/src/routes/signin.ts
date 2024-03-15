@@ -6,6 +6,7 @@ import { checkuser } from '../database/db'
 
 const code= process.env.SECRET
 
+
 const userinfo=z.object({
     username:z.string(),
     password:z.string()
@@ -21,7 +22,7 @@ router.post('/signin',async (req,res)=>{
     let checkacc= userdetails.data.username
     let haveacc= await checkuser(checkacc)
     if(!haveacc){
-        res.send("please signup first")
+        res.send("please create your account")
         return    
     }
     else{
