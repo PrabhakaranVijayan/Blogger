@@ -4,8 +4,8 @@
 import express, { json } from 'express'
 const router= express.Router()
 
-import z from 'zod'
-import { createBlog } from '../database/db';
+import z, { number } from 'zod'
+import { createBlog, readBlog } from '../database/db';
 
 const blogschema= z.object({
     title:z.string(),
@@ -29,10 +29,9 @@ router.post('/blogs/new',async (req,res)=>{
 // READ  BLOG
 
 router.get('/blogs/:id',async(req,res)=>{
-    const blogid= req.params.id
-    if(!blogid){
-        res.status(200).json({})
-    }
+    const blogid= parseInt(req.params.id)
+    let viewblog= await readBlog(blogid)
+    res.status(200).send(viewblog)
 })
 
 

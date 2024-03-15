@@ -5,6 +5,7 @@ const newuser= require('./routes/signup')
 app.use(express.json())
 const login= require('./routes/signin')
 const posts= require('./routes/Blogs')
+
 import dotenv from 'dotenv'
 dotenv.config()
 
@@ -16,6 +17,7 @@ app.use('/user',newuser)
 app.use('/user',login)
 
 app.use('/user',authenticate,posts)
+
 
 
 

@@ -44,7 +44,13 @@ export async function createBlog(title:string,content:string,userId:number){
 
 export async function readBlog(id:number | null){
     if(!id){
-        const allblogs= await prisma.blog.findMany()
+        const allblogs= await prisma.blog.findMany({
+            select:{
+                title:true
+                
+
+            }
+        })
         return allblogs;
 
     }
@@ -53,8 +59,8 @@ export async function readBlog(id:number | null){
             id:id
         },
         select:{
-            title:true,
-            content:true
+            title:true
+        
         }
     })
     return selectedblog;
