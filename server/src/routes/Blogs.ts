@@ -5,7 +5,7 @@ import express, { json } from 'express'
 const router= express.Router()
 
 import z, { number } from 'zod'
-import { createBlog, readBlog } from '../database/db';
+import { createBlog, readAllBlog, readBlog, updatedBlog } from '../database/db';
 
 const blogschema= z.object({
     title:z.string(),
@@ -32,6 +32,22 @@ router.get('/blogs/:id',async(req,res)=>{
     const blogid= parseInt(req.params.id)
     let viewblog= await readBlog(blogid)
     res.status(200).send(viewblog)
+})
+router.get('/blogs',async(req,res)=>{
+    
+    let viewblog= await readAllBlog()
+    res.status(200).send(viewblog)
+})
+router.put('/blogs/:id',async (req,res)=>{
+    const editBlog= parseInt(req.params.id)
+    const updateblog= blogschema.safeParse(req.body)
+    if(!updateblog.success){
+        res.send("please update the correct course")
+        return
+    }
+    let updated= await updatedBlog(editBlog,updateblog.data.title,updateblog.data.content,updateblog.data.userid)
+    res.send(200).send(updated)
+
 })
 
 

@@ -42,18 +42,8 @@ export async function createBlog(title:string,content:string,userId:number){
     return newBlog
 }
 
-export async function readBlog(id:number | null){
-    if(!id){
-        const allblogs= await prisma.blog.findMany({
-            select:{
-                title:true
-                
-
-            }
-        })
-        return allblogs;
-
-    }
+export async function readBlog(id:number){
+   
     const selectedblog= await prisma.blog.findUnique({
         where:{
             id:id
@@ -65,6 +55,32 @@ export async function readBlog(id:number | null){
     })
     return selectedblog;
 
+}
+
+export async function readAllBlog(){
+    const allblogs= await prisma.blog.findMany({
+        select:{
+            title:true
+            
+
+        }
+    })
+    
+    return allblogs;
+
+}
+export async function updatedBlog(id:number,title:string,content:string,userid:number){
+    const updating= await prisma.blog.update({
+        where:{
+            id:id
+        },
+        data:{
+            title:title,
+            content:content,
+            userId:userid
+        }
+    })
+    return updating;
 }
 
 
