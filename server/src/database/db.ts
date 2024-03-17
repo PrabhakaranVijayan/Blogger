@@ -82,6 +82,14 @@ export async function updatedBlog(id:number,title:string,content:string,userid:n
     })
     return updating;
 }
+export async function deleteBlog(id:number){
+    const deleteid= await prisma.blog.delete({
+        where:{
+            id:id
+        }
+    })
+    return deleteid
+}
 
 
 

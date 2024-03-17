@@ -5,7 +5,7 @@ import express, { json } from 'express'
 const router= express.Router()
 
 import z, { number } from 'zod'
-import { createBlog, readAllBlog, readBlog, updatedBlog } from '../database/db';
+import { createBlog, deleteBlog, readAllBlog, readBlog, updatedBlog } from '../database/db';
 
 const blogschema= z.object({
     title:z.string(),
@@ -48,6 +48,12 @@ router.put('/blogs/:id',async (req,res)=>{
     let updated= await updatedBlog(editBlog,updateblog.data.title,updateblog.data.content,updateblog.data.userid)
     res.send(200).send(updated)
 
+})
+
+router.delete('/blogs/:id',async(req,res)=>{
+    const delblog= parseInt(req.params.id)
+    const deleted= await deleteBlog(delblog)
+    res.status(201).send(`the blog ${deleted} is deleted`)
 })
 
 
