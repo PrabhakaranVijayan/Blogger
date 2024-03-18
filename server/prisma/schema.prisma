@@ -30,5 +30,5 @@ model blog {
   content String
   Status Boolean @default(false)
   userId Int
-  user User @relation(fields: [userId], references: [id])
+  author User @relation(fields: [userId], references: [id])
 }
