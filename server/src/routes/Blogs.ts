@@ -22,6 +22,7 @@ router.post('/blogs/new',async (req,res)=>{
         return
     }
     let crBlog= await createBlog(blogPost.data.title,blogPost.data.content,blogPost.data.userid)
+    if(crBlog.title)
     res.status(200).send(`your blog is ${crBlog.title} created`);
 
 })

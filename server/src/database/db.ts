@@ -1,45 +1,62 @@
 import { PrismaClient } from '@prisma/client'
-import { number } from 'zod';
+
 
 const prisma = new PrismaClient()
 
 export default async function inserti (username:string,password:string,fullname:string,role:string){
-    const res = await prisma.user.create({
-        data:{
-            username,
-            password,
-            fullname,
-            role
-            
-        }
-    })
-    console.log(res);
-    return ("user created successfully")
+    try{
+        const res = await prisma.user.create({
+            data:{
+                username,
+                password,
+                fullname,
+                role
+                
+            }
+        })
+        console.log(res);
+        return ("user created successfully")
+
+    }
+    catch(error){
+        return (`error occured ${error} please check your input`)
+    }
     
 }
 export  async function checkuser(username:string){
-    const ans= await prisma.user.findUnique({
-        where:{
-            username:username
-            
-        }
+    try{
+        const ans= await prisma.user.findUnique({
+            where:{
+                username:username
+                
+            }
+    
+        })
+        return ans
 
-    })
-    return ans
+    }
+    catch(error){
+        return (`error occured ${error} please check your input`)
+    }
 }
 
 export async function createBlog(title:string,content:string,userId:number){
-    const newBlog= await prisma.blog.create({
-        data:{
-            title,
-            content,
-            userId
+   
+        const newBlog= await prisma.blog.create({
+            data:{
+                title,
+                content,
+                userId
+                
+            }
+           
             
-        }
-       
-        
-    })
-    return newBlog
+        })
+        return newBlog
+
+    
+
+    
 }
 
 export async function readBlog(id:number){
